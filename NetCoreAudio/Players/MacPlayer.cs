@@ -11,6 +11,15 @@ namespace NetCoreAudio.Players
             return "afplay";
         }
 
+        protected override string GetBashCommandWithSeek(string fileName, long positionMs)
+        {
+            if (positionMs > 0)
+            {
+                return $"afplay -t {positionMs.ToString()}ms";
+            }
+            return GetBashCommand(fileName);
+        }
+
         public override Task SetVolume(byte percent)
         {
             if (percent > 100)

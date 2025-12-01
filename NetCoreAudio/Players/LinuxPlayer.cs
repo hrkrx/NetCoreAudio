@@ -9,14 +9,19 @@ namespace NetCoreAudio.Players
     {
         protected override string GetBashCommand(string fileName)
         {
-            if (Path.GetExtension(fileName).ToLower().Equals(".mp3"))
+            // Use ffplay for all audio files as it supports seeking
+            return "ffplay -nodisp -autoexit -loglevel quiet";
+        }
+        
+        protected override string GetBashCommandWithSeek(string fileName, long positionMs)
+        {
+            if (positionMs > 0)
             {
-                return "mpg123 -q";
+                // Convert milliseconds to seconds for ffplay's -ss parameter
+                double positionSeconds = positionMs / 1000.0;
+                return $"ffplay -nodisp -autoexit -ss {positionSeconds.ToString(System.Globalization.CultureInfo.InvariantCulture)} -loglevel quiet";
             }
-            else
-            {
-                return "aplay -q";
-            }
+            return GetBashCommand(fileName);
         }
 
         public override Task SetVolume(byte percent)

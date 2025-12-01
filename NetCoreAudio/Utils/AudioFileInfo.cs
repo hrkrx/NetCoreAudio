@@ -6,7 +6,7 @@ namespace NetCoreAudio.Utils
 {
     public  class AudioFileInfo
     {
-        public int Length { get; set; }
+        public long Length { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
         public string FileExtension { get; set; }
