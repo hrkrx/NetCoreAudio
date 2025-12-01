@@ -8,7 +8,7 @@ The library exposes Player class, which detects the OS the library is running on
 
 ### MP3 Playback on linux
 
-The library relies on the mpg123 audio player for playback of .mp3 files on linux.
+The library relies on the ffplay audio player for playback of .mp3 files on linux.
 
 ## Properties
 
