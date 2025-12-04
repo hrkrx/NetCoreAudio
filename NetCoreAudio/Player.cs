@@ -28,12 +28,14 @@ namespace NetCoreAudio
 
         public Player()
         {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            if (OperatingSystem.IsWindows())
                 _internalPlayer = new WindowsPlayer();
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            else if (OperatingSystem.IsLinux())
                 _internalPlayer = new LinuxPlayer();
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            else if (OperatingSystem.IsMacOS())
                 _internalPlayer = new MacPlayer();
+            else if (OperatingSystem.IsAndroid())
+                _internalPlayer = new AndroidPlayer();
             else
                 throw new Exception("No implementation exist for the current OS");
 
