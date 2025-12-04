@@ -13,9 +13,9 @@ namespace NetCoreAudio.Players
         private AudioFileInfo _audioFileInfo = new AudioFileInfo();
         private IAudioPlayer _audioPlayer;
         private IAudioManager _audioManager;
-        public bool Playing => throw new NotImplementedException();
+        public bool Playing => _audioPlayer != null && _audioPlayer.IsPlaying;
 
-        public bool Paused => throw new NotImplementedException();
+        public bool Paused => _audioPlayer != null && !_audioPlayer.IsPlaying;
 
         public event EventHandler PlaybackFinished;
 
